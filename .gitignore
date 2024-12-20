@@ -1,0 +1,19 @@
+# Description: Git에서 제외할 파일 목록.
+
+# 환경 변수 파일
+.env
+
+# Python 캐시 파일
+__pycache__/
+*.py[cod]
+
+# 기타 OS 파일
+.DS_Store
+Thumbs.db
+
+# 로그 파일
+*.log
+
+# IDE 설정
+.idea/
+.vscode/
