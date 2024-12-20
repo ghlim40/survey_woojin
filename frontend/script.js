@@ -6,15 +6,45 @@ const resultTableBody = document.getElementById('resultTable').querySelector('tb
 // 메시지 전송 버튼 클릭 이벤트 리스너
 sendButton.addEventListener('click', () => {
     const message = document.getElementById('message').value; // 입력된 메시지 값 가져오기
-    fetch('http://localhost:5000/api/send', {
+    const selectedUsers = [];
+
+    // 선택된 사용자 데이터 수집
+    const rows = resultTableBody.querySelectorAll('tr');
+    rows.forEach(row => {
+        const checkbox = row.querySelector('input[type="checkbox"]');
+        if (checkbox && checkbox.checked) {
+            const user = {
+                Name: row.cells[1].textContent,
+                Position: row.cells[2].textContent,
+                Department: row.cells[3].textContent,
+                Team: row.cells[4].textContent,
+                Phone: row.cells[5].textContent
+            };
+            selectedUsers.push(user);
+        }
+    });
+
+    if (selectedUsers.length === 0) {
+        alert('Please select at least one user.');
+        return;
+    }
+
+    fetch('http://localhost:5000/api/send_message', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message }), // 메시지를 JSON 형식으로 변환하여 전송
+        body: JSON.stringify({ message, users: selectedUsers }), // 메시지와 선택된 사용자 데이터 전송
     })
     .then(response => response.json())
-    .then(data => alert('Message sent!')) // 성공 시 알림 표시
+    .then(data => {
+        if (data.error) {
+            alert(`Error: ${data.error}`);
+        } else {
+            alert('Messages sent successfully!');
+            console.log('Response:', data);
+        }
+    })
     .catch(error => console.error('Error:', error)); // 오류 처리
 });
 
