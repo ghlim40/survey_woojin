@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    /* 텍스트 입력 필드 스타일 */
+    width: 80%;
+    height: 100px;
+    margin: 20px auto;
+}
+
+button {
+    /* 버튼 스타일 */
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
