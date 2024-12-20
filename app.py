@@ -1,13 +1,18 @@
 # Description: Flask 애플리케이션 메인 파일.
 
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, send_from_directory
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="frontend", static_url_path="")
 
 @app.route('/')
-def home():
-    # 홈 페이지 엔드포인트
-    return send_from_directory("frontend", "index.html") 
+def serve_frontend():
+    # 프론트엔드의 index.html 제공
+    return send_from_directory("frontend", "index.html")  
+  
+@app.route('/<path:path>')
+def serve_static_files(path):
+    # 프론트엔드의 정적 파일 제공
+    return send_from_directory("frontend", path) 
 
 if __name__ == '__main__':
     # Flask 서버 실행

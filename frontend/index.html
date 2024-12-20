@@ -8,8 +8,27 @@
     <h1>Welcome to Survey Woojin</h1>
     <!-- 메세지 입력 필드 -->
     <textarea id="message" placeholder="Write your message here..."></textarea>
-    <!-- 전송 버튼 -->
     <button id="send">Send</button>
+
+    <!-- 파일 업로드 필드 -->
+    <input type="file" id="csvFile">
+    <button id="process">Process CSV</button>
+
+    <!-- CSV 데이터 결과를 위한 테이블 -->
+    <table id="resultTable" border="1">
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Department</th>
+                <th>Team</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
     <script src="script.js"></script>
 </body>
 </html>
